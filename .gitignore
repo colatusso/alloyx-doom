@@ -1,0 +1,18 @@
+# artefatos de build — regenerados por ./play.sh (allx transpila o Apex, javac compila o host)
+.apexcache/
+*.class
+
+# python (gerador)
+__pycache__/
+
+# macOS
+.DS_Store
+
+# dados do jogo e artefato gerado localmente
+*.wad
+*.WAD
+/WadData.cls
+
+# configuracao local
+.env
+.env.*

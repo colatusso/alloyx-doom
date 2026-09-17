@@ -1,0 +1,19 @@
+AlloyX DOOM
+Copyright (c) 2026 Rafael Colatusso
+
+The code in this repository is licensed under GPL-3.0-or-later (see LICENSE).
+
+Third-party source attribution
+------------------------------
+The MUS-to-MIDI conversion in tools/wad2apex.py adapts mus2mid.c from
+Chocolate Doom, licensed under GPL-2.0-or-later and used here under GPLv3.
+Original source: https://github.com/chocolate-doom/chocolate-doom/blob/master/src/mus2mid.c
+Original copyright notices: 1993-1996 id Software, Inc.; 2005-2014 Simon
+Howard; 2006 Ben Ryves.
+
+Game data and trademarks
+------------------------
+DOOM game data, artwork, music, sounds and related trademarks belong to their
+respective owners. No WAD or data derived from a WAD is distributed in this
+repository. AlloyX and Apex are separate projects/trademarks; this project is
+not affiliated with id Software, Bethesda, Salesforce or Chocolate Doom.
