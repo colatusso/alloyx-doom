@@ -2,12 +2,14 @@
 
 [English](README.md)
 
-**Sim, e é jogável.** DOOM rodando com o **engine escrito em Apex** — parser do WAD oficial,
-matemática fixed-point e raycaster — transpilado para Java pelo [AlloyX](https://github.com/colatusso/alloyx) e rodando
-em **tempo real numa janela** (gráfico, colorido, ~60fps) com teclado.
+**Sim, e é jogável.** Este projeto recria a experiência de DOOM com um **engine escrito em Apex**:
+parser de WAD, matemática fixed-point e renderizador por software. O [AlloyX](https://github.com/colatusso/alloyx)
+transpila o código Apex para Java, que é compilado para a JVM e roda **em tempo real numa janela**
+(gráfico, colorido, ~60 fps) com teclado.
 
-O nível é o **E1M1 (Hangar)** lido direto do `DOOM1.WAD` oficial
-(shareware id Software, `md5 f0cefca49926d00903cf57551d901abe`).
+Os mapas **E1M1 (Hangar)** e E1M2 são preparados a partir de uma cópia oficial do `DOOM1.WAD`
+fornecida pelo usuário (shareware id Software, `md5 f0cefca49926d00903cf57551d901abe`)
+antes de serem carregados pelo engine Apex.
 
 ![AlloyX DOOM rodando E1M1 na janela do jogo](assets/doom-e1m1.png)
 
@@ -60,15 +62,23 @@ Loop de DOOM completo, tudo no engine Apex:
 
 Janela **1200×750 redimensionável** (arraste/maximize). Resolução interna 400×250 estilo DOOM.
 
-> O **engine é 100% Apex** (`Doom.cls` + `Wad.cls`). O host (`Game.java`) só abre a janela, lê o
-> teclado e desenha o framebuffer RGB que o Apex calcula a cada frame. Internamente roda a ~2000fps
-> a 320×200 (limitado a 60 pelo loop) — sobra folga de CPU.
+### Engine Apex, host Java
+
+`Doom.cls` é **100% código-fonte Apex**, sem Java embutido nem renderizador 3D em Java. Ele implementa
+movimento, colisão, combate, monstros, renderização por software e o framebuffer RGB retornado por
+`stepFrame(cmd)`. `Wad.cls` também é Apex e interpreta os dados do WAD gerado. A 320×200, o engine
+roda internamente a aproximadamente 2.000 fps; o loop da janela limita a 60 fps.
+
+`Game.java` fornece a janela, recebe o teclado, exibe cada frame, controla o tempo e reproduz o áudio.
+O gerador Python prepara os recursos do WAD do usuário antes da execução. Isso **não diminui o trabalho
+em Apex**: o host não calcula as regras do jogo nem renderiza a cena 3D. A afirmação de 100% Apex se
+refere ao **código-fonte do engine**, não ao programa desktop inteiro nem à execução dentro de uma org Salesforce.
 
 ### Por que não roda "puro pelo `allx run`"?
 `allx run` é **one-shot** (executa um método e sai) e só escreve **texto** no stdout — não tem loop de
 input nem saída gráfica, e cada chamada custa ~0,5s. Tempo real é impossível assim. A solução fiel ao
 AlloyX ("seu Apex roda como Java na JVM"): **transpila o engine Apex uma vez** e roda num host de
-tempo real. A lógica do jogo continua sendo o seu Apex — só o laço de janela/teclado é Java.
+tempo real. A lógica do jogo continua em Apex; janela, teclado, exibição e áudio ficam no host Java.
 
 ## Bônus — o mesmo engine Apex via `allx run` (modo texto)
 
@@ -130,7 +140,7 @@ fornecido localmente e extrai os mapas disponíveis; o `Wad.cls` parseia normalm
 - `Doom.cls` — raycaster + API gráfica (`init`/`stepFrame`) + automap + walkthrough ASCII (Apex)
 - `Wad.cls` — parser de WAD + decode base64 + leitura LE (Apex)
 - `WadData.cls` — **gerado localmente, fora do Git**: PWAD dos mapas em base64
-- `Game.java` — host Java de tempo real (janela + teclado + blit)
+- `Game.java` — host Java de tempo real (janela + teclado + blit + áudio)
 - `play.sh` — compila tudo e abre o jogo
 - `run.sh` — player do walkthrough ASCII no terminal
 - `tools/wad2apex.py` — gerador (lê o WAD oficial → `WadData.cls`)
