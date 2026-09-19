@@ -9,6 +9,8 @@ em **tempo real numa janela** (gráfico, colorido, ~60fps) com teclado.
 O nível é o **E1M1 (Hangar)** lido direto do `DOOM1.WAD` oficial
 (shareware id Software, `md5 f0cefca49926d00903cf57551d901abe`).
 
+![AlloyX DOOM rodando E1M1 na janela do jogo](assets/doom-e1m1.png)
+
 ## Jogar (gráfico, tempo real)
 
 Requer JDK, Python 3, `allx` no `PATH` e o projeto `apex-local` compilado na pasta irmã.

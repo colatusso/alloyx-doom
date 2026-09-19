@@ -6,6 +6,8 @@
 
 The game loads **E1M1 (Hangar)** directly from the official `DOOM1.WAD` (id Software shareware, `md5 f0cefca49926d00903cf57551d901abe`).
 
+![AlloyX DOOM running E1M1 in its desktop window](assets/doom-e1m1.png)
+
 ## Play (graphics, real time)
 
 Requires a JDK, Python 3, `allx` on your `PATH`, and the sibling `apex-local` project built. Place a legitimate copy of the shareware `doom1.wad` in this directory. Neither the WAD nor the derived `WadData.cls` is distributed in this repository. The first `./play.sh` run generates `WadData.cls` automatically.
